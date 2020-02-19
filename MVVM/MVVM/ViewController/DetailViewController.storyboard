@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZiY-rc-YrH">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Detail View Controller-->
+        <scene sceneID="04i-6w-Df0">
+            <objects>
+                <viewController id="ZiY-rc-YrH" customClass="DetailViewController" customModule="MVVM" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="grs-BX-a82">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Dk-gW-3WA">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="7Dk-gW-3WA" secondAttribute="bottom" id="0Cv-QA-nyO"/>
+                            <constraint firstItem="7Dk-gW-3WA" firstAttribute="leading" secondItem="Cmw-FZ-oSM" secondAttribute="leading" id="CgK-bT-Bq5"/>
+                            <constraint firstItem="7Dk-gW-3WA" firstAttribute="trailing" secondItem="Cmw-FZ-oSM" secondAttribute="trailing" id="V5r-XK-1J8"/>
+                            <constraint firstItem="7Dk-gW-3WA" firstAttribute="top" secondItem="grs-BX-a82" secondAttribute="top" id="h41-AQ-mnE"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Cmw-FZ-oSM"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="7Dk-gW-3WA" id="pdw-QK-FaT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="otq-Yk-jQh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-259.4202898550725" y="-278.57142857142856"/>
+        </scene>
+    </scenes>
+</document>
