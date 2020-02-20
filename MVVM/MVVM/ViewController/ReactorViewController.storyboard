@@ -1,7 +1,74 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oJx-he-HyJ">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Reactor View Controller-->
+        <scene sceneID="RwO-4v-B2W">
+            <objects>
+                <viewController id="oJx-he-HyJ" customClass="ReactorViewController" customModule="MVVM" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bev-yg-mb0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9Xs-pw-aKY">
+                                <rect key="frame" x="0.0" y="44" width="414" height="80"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ReactorKit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kx6-zd-z0z">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xl9-iI-ivn">
+                                        <rect key="frame" x="0.0" y="30" width="414" height="50"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1TQ-Vk-kgp">
+                                                <rect key="frame" x="15" y="5" width="384" height="40"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="1TQ-Vk-kgp" secondAttribute="trailing" constant="15" id="BVE-8R-kRf"/>
+                                            <constraint firstItem="1TQ-Vk-kgp" firstAttribute="top" secondItem="Xl9-iI-ivn" secondAttribute="top" constant="5" id="Dx5-sM-1eI"/>
+                                            <constraint firstItem="1TQ-Vk-kgp" firstAttribute="leading" secondItem="Xl9-iI-ivn" secondAttribute="leading" constant="15" id="a4S-5i-6QY"/>
+                                            <constraint firstAttribute="bottom" secondItem="1TQ-Vk-kgp" secondAttribute="bottom" constant="5" id="hpC-iJ-Q7K"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Hgv-A8-wAh">
+                                <rect key="frame" x="0.0" y="124" width="414" height="772"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <viewLayoutGuide key="safeArea" id="wcL-EB-CAT"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Hgv-A8-wAh" firstAttribute="leading" secondItem="bev-yg-mb0" secondAttribute="leading" id="AfB-4F-td1"/>
+                            <constraint firstItem="Hgv-A8-wAh" firstAttribute="top" secondItem="9Xs-pw-aKY" secondAttribute="bottom" id="GAq-vm-1c3"/>
+                            <constraint firstAttribute="trailing" secondItem="Hgv-A8-wAh" secondAttribute="trailing" id="LqL-zM-Udd"/>
+                            <constraint firstItem="9Xs-pw-aKY" firstAttribute="leading" secondItem="bas-hw-ndW" secondAttribute="leading" id="N3M-zF-ahF"/>
+                            <constraint firstItem="9Xs-pw-aKY" firstAttribute="top" secondItem="bas-hw-ndW" secondAttribute="top" id="bzj-Cu-5Sr"/>
+                            <constraint firstAttribute="trailing" secondItem="9Xs-pw-aKY" secondAttribute="trailing" id="lmg-dX-gBL"/>
+                            <constraint firstAttribute="bottom" secondItem="Hgv-A8-wAh" secondAttribute="bottom" id="m5Q-jJ-qR8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="bas-hw-ndW"/>
+                    </view>
+                    <connections>
+                        <outlet property="searchKeywoard" destination="1TQ-Vk-kgp" id="9J8-aa-BoM"/>
+                        <outlet property="tableView" destination="Hgv-A8-wAh" id="qtj-bO-LJ7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AAe-8E-F7r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="186" y="-212"/>
+        </scene>
+    </scenes>
 </document>

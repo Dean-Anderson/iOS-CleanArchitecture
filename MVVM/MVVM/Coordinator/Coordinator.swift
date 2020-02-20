@@ -27,15 +27,17 @@ final class Coordinator: CoordinatorProviding {
     }
     
     func show(scene: Scene) {
+        let vc: UIViewController
+        
         switch scene {
         case .mvvm:
-            let vc = MVVMViewController.createInstance()
-            navigationController?.pushViewController(vc, animated: true)
+            vc = MVVMViewController.createInstance()
         case .reactorKit:
-            break
+            vc = ReactorViewController.createInstance()
         case .detail(let url):
-            let vc = DetailViewController.createInstance(url)
-            navigationController?.pushViewController(vc, animated: true)
+            vc = DetailViewController.createInstance(url)
         }
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
