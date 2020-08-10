@@ -24,7 +24,12 @@ final class DetailViewController: UIViewController {
     private func bind() {
         urlSubject.asObservable()
             .subscribe(onNext: { [weak self] in
-                self?.imageView.sd_setImage(with: $0, completed: nil)
+                guard let url = $0 else {
+                    self?.imageView.image = nil
+                    return
+                }
+                
+                self?.imageView.kf.setImage(with: .network(url))
             })
             .disposed(by: disposeBag)
     }

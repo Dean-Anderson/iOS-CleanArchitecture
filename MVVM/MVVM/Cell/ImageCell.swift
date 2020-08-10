@@ -9,10 +9,10 @@
 import UIKit
 import RxCocoa
 import RxSwift
-import SDWebImage
+import Kingfisher
 
 final class ImageCell: UITableViewCell {
-    @IBOutlet fileprivate weak var thumImageView: UIImageView!
+    @IBOutlet private weak var thumImageView: UIImageView!
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -20,6 +20,11 @@ final class ImageCell: UITableViewCell {
     }
     
     func set(url: URL?) {
-        thumImageView.sd_setImage(with: url, completed: nil)
+        guard let url = url else {
+            thumImageView.image = nil
+            return
+        }
+        
+        thumImageView.kf.setImage(with: .network(url))
     }
 }

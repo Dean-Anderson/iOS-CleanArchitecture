@@ -14,7 +14,7 @@ protocol ImageServiceProviding {
     func images(query: String?) -> Observable<Swift.Result<[ImagePack], CustomError>>
 }
 
-final class ImageService: ImageServiceProviding {
+struct ImageService: ImageServiceProviding {
     func images(query: String?) -> Observable<Swift.Result<[ImagePack], CustomError>> {
         guard let safeQuery = query,
             safeQuery.count > 0 else {
