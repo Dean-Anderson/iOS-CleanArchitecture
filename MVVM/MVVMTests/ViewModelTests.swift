@@ -7,7 +7,6 @@
 //
 
 @testable import MVVM
-import RxSwift
 import XCTest
 
 class ViewModelTests: XCTestCase {

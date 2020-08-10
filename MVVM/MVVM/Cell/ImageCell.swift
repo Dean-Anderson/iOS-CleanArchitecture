@@ -6,9 +6,6 @@
 //  Copyright © 2020 Practice. All rights reserved.
 //
 
-import UIKit
-import RxCocoa
-import RxSwift
 import Kingfisher
 
 final class ImageCell: UITableViewCell {
