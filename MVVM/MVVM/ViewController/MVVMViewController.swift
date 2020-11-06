@@ -8,13 +8,20 @@
 
 import RxSwift
 
+private protocol ViewModelBindable {
+    var viewModel: ImageViewModel { get }
+    var coordinator: Coordinator? { get }
+    var disposeBag: DisposeBag { get }
+    func bind(text: Observable<String?>, tableView: UITableView)
+}
+
 final class MVVMViewController: UIViewController {
     @IBOutlet private weak var searchKeywoard: UITextField!
     @IBOutlet private weak var tableView: UITableView!
     
-    private let viewModel: ImageViewModel = ImageViewModel(service: ImageService())
-    private var coordinator: Coordinator?
-    private let disposeBag: DisposeBag = DisposeBag()
+    fileprivate let viewModel: ImageViewModel = ImageViewModel(service: ImageService())
+    fileprivate var coordinator: Coordinator?
+    fileprivate let disposeBag: DisposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +36,19 @@ final class MVVMViewController: UIViewController {
     }
     
     private func bind() {
-        searchKeywoard.rx.text
+        let textObservable = searchKeywoard.rx.text
             .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.input.search(keyword: $0)
+        
+        bind(text: textObservable,
+             tableView: tableView)
+    }
+}
+
+extension MVVMViewController: ViewModelBindable {
+    func bind(text: Observable<String?>, tableView: UITableView) {
+        text
+            .subscribe(onNext: { [weak viewModel] in
+                viewModel?.input.search(keyword: $0)
             })
             .disposed(by: disposeBag)
         
@@ -46,8 +62,8 @@ final class MVVMViewController: UIViewController {
         tableView.rx.modelSelected(ImagePack.self)
             .compactMap{ $0.linkURL }
             .map{ Scene.detail($0) }
-            .subscribe(onNext: { [weak self] in
-                self?.coordinator?.show(scene: $0)
+            .subscribe(onNext: { [weak coordinator] in
+                coordinator?.show(scene: $0)
             })
             .disposed(by: disposeBag)
     }

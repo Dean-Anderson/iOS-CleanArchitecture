@@ -13,8 +13,8 @@ final class ReactorViewController: UIViewController, StoryboardView {
     @IBOutlet private weak var searchKeywoard: UITextField!
     @IBOutlet private weak var tableView: UITableView!
     
+    fileprivate var coordinator: Coordinator?
     var reactor: ImageReactor? = ImageReactor(service: ImageService())
-    private var coordinator: Coordinator?
     var disposeBag: DisposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -40,8 +40,8 @@ final class ReactorViewController: UIViewController, StoryboardView {
             .map{ $0.images }
             .bind(to: tableView.rx.items(cellIdentifier: ImageCell.className, cellType: ImageCell.self)) { (row, image, cell) in
                 cell.set(url: image.thumbnailURL)
-        }
-        .disposed(by: disposeBag)
+            }
+            .disposed(by: disposeBag)
     }
     
     private func bind() {
