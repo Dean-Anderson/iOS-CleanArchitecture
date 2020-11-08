@@ -8,28 +8,32 @@
 
 import RxSwift
 import RxCocoa
+import WebKit
 
 final class DetailViewController: UIViewController {
-    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var webViewContainer: UIView!
     
+    private let webView: WKWebView = WKWebView()
     private let urlSubject: ReplaySubject<URL?> = ReplaySubject.create(bufferSize: 1)
     private let disposeBag: DisposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setup()
         bind()
+    }
+    
+    private func setup() {
+        webViewContainer.addSubviewWithFit(webView)
     }
     
     private func bind() {
         urlSubject.asObservable()
+            .compactMap{ $0 }
+            .map{ URLRequest(url: $0) }
             .subscribe(onNext: { [weak self] in
-                guard let url = $0 else {
-                    self?.imageView.image = nil
-                    return
-                }
-                
-                self?.imageView.kf.setImage(with: .network(url))
+                self?.webView.load($0)
             })
             .disposed(by: disposeBag)
     }

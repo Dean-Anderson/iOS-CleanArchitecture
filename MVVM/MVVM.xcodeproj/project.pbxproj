@@ -34,6 +34,7 @@
 		0543753E24E0D8ED0028AD6F /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0543753D24E0D8ED0028AD6F /* ViewModelTests.swift */; };
 		0543754024E0D8F90028AD6F /* ReactorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0543753F24E0D8F90028AD6F /* ReactorTests.swift */; };
 		0543754224E0D9EF0028AD6F /* ImageService+Testable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0543754124E0D9EF0028AD6F /* ImageService+Testable.swift */; };
+		0550FC2025581318003927A8 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0550FC1F25581318003927A8 /* UIView+Extension.swift */; };
 		8A54245ED7AAE4DF65A12386 /* Pods_MVVMTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB136012A11C1211726DFAEE /* Pods_MVVMTests.framework */; };
 		B4A847583F6E7F7EEA8EBE09 /* Pods_MVVM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25C285515122AFA3C5405614 /* Pods_MVVM.framework */; };
 /* End PBXBuildFile section */
@@ -81,6 +82,7 @@
 		0543753D24E0D8ED0028AD6F /* ViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTests.swift; sourceTree = "<group>"; };
 		0543753F24E0D8F90028AD6F /* ReactorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactorTests.swift; sourceTree = "<group>"; };
 		0543754124E0D9EF0028AD6F /* ImageService+Testable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageService+Testable.swift"; sourceTree = "<group>"; };
+		0550FC1F25581318003927A8 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		25C285515122AFA3C5405614 /* Pods_MVVM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MVVM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E29EFB16DE8048462039E7C /* Pods-MVVMTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVVMTests.release.xcconfig"; path = "Target Support Files/Pods-MVVMTests/Pods-MVVMTests.release.xcconfig"; sourceTree = "<group>"; };
 		BB136012A11C1211726DFAEE /* Pods_MVVMTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MVVMTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -221,6 +223,7 @@
 			children = (
 				050BBE5323FD162300C87E1E /* NSObject+Extension.swift */,
 				050BBE5723FD26E800C87E1E /* Result+Extension.swift */,
+				0550FC1F25581318003927A8 /* UIView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -473,6 +476,7 @@
 				0543754224E0D9EF0028AD6F /* ImageService+Testable.swift in Sources */,
 				050BBE2223FD032000C87E1E /* SceneDelegate.swift in Sources */,
 				050BBE5B23FD28FE00C87E1E /* VCFactory.swift in Sources */,
+				0550FC2025581318003927A8 /* UIView+Extension.swift in Sources */,
 				050BBE4A23FD136700C87E1E /* DetailViewController.swift in Sources */,
 				050BBE3723FD065600C87E1E /* APIClient.swift in Sources */,
 				050BBE3C23FD095100C87E1E /* ImageService.swift in Sources */,
