@@ -8,7 +8,6 @@ def pods
   pod 'Kingfisher'    ,'~>5.0'
   pod 'ReactorKit'    ,'~>2.0'
   pod 'RxCocoa'       ,'~>5.0'
-  pod 'RxDataSources' ,'~>4.0'
   pod 'SwiftyJSON'    ,'~>4.0'
 end
    

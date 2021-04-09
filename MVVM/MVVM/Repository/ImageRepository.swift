@@ -1,5 +1,5 @@
 //
-//  ImageService.swift
+//  ImageRepository.swift
 //  MVVM
 //
 //  Created by dean.anderson on 2020/02/19.
@@ -10,11 +10,11 @@ import RxSwift
 import Alamofire
 import SwiftyJSON
 
-protocol ImageServiceProviding {
+protocol ImageRepository {
     func images(query: String?) -> Observable<Swift.Result<[ImagePack], CustomError>>
 }
 
-struct ImageService: ImageServiceProviding {
+struct ImageServerRepository: ImageRepository {
     func images(query: String?) -> Observable<Swift.Result<[ImagePack], CustomError>> {
         guard let safeQuery = query,
             safeQuery.count > 0 else {

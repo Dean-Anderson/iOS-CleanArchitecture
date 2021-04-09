@@ -27,8 +27,8 @@ final class ViewController: UIViewController {
     }
     
     private func bind() {
-        let mvvm = mvvmButton.rx.tap.asObservable().map{ Scene.mvvm }
-        let reactorKit = reactorkitButton.rx.tap.asObservable().map{ Scene.reactorKit }
+        let mvvm = mvvmButton.rx.tap.asObservable().map{ Scene.mvvm(.normal) }
+        let reactorKit = reactorkitButton.rx.tap.asObservable().map{ Scene.reactorKit(.normal) }
             
         Observable.merge(mvvm, reactorKit)
             .throttle(.seconds(1), scheduler: MainScheduler.instance)

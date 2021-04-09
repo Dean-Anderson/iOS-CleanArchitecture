@@ -30,20 +30,19 @@ class ViewModelTests: XCTestCase {
     }
     
     func testSuccess () throws {
-        let service = ImageSuccessService()
-        viewModel = ImageViewModel(service: service)
+        let repository = ImageSuccessRepository()
+        let useCase = DefaultImageSearchUseCase(repository: repository)
+        viewModel = ImageViewModel(useCase: useCase)
         
-        _ = viewModel.output.results
-            .compactMap{ $0.success }
+        _ = viewModel.output.imageCellCreatables
             .take(1)
             .subscribe(onNext: {
                 XCTAssertEqual($0.count, 1)
                 let pack = $0.first!
-                XCTAssertEqual(pack, service.mock)
+                XCTAssertEqual(pack.imageURL, repository.mock.imageURL)
             })
             
-        _ = viewModel.output.results
-            .compactMap{ $0.failure }
+        _ = viewModel.output.error
             .take(1)
             .subscribe(onNext: { _ in try? TestError.throwError() })
         
@@ -51,15 +50,15 @@ class ViewModelTests: XCTestCase {
     }
     
     func testFailureViewModel() throws {
-        viewModel = ImageViewModel(service: ImageFailureService())
+        let repository = ImageFailureRepository()
+        let useCase = DefaultImageSearchUseCase(repository: repository)
+        viewModel = ImageViewModel(useCase: useCase)
         
-        _ = viewModel.output.results
-            .compactMap{ $0.success }
+        _ = viewModel.output.imageCellCreatables
             .take(1)
-            .subscribe(onNext: { XCTAssertEqual($0.count, 0) })
+            .subscribe(onNext: { _ in XCTFail() })
             
-        _ = viewModel.output.results
-            .compactMap{ $0.failure }
+        _ = viewModel.output.error
             .take(1)
             .subscribe(onNext: { XCTAssertEqual($0, CustomError.unknown) })
         

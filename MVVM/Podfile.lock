@@ -1,22 +1,17 @@
 PODS:
-  - Alamofire (5.4.0)
-  - Differentiator (4.0.1)
-  - Kingfisher (5.15.7):
-    - Kingfisher/Core (= 5.15.7)
-  - Kingfisher/Core (5.15.7)
-  - ReactorKit (2.1.0):
+  - Alamofire (5.4.2)
+  - Kingfisher (5.15.8):
+    - Kingfisher/Core (= 5.15.8)
+  - Kingfisher/Core (5.15.8)
+  - ReactorKit (2.1.1):
     - RxSwift (~> 5.0)
     - WeakMapTable (~> 1.1)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
-  - RxDataSources (4.0.1):
-    - Differentiator (~> 4.0)
-    - RxCocoa (~> 5.0)
-    - RxSwift (~> 5.0)
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
-  - RxSwift (5.1.1)
+  - RxSwift (5.1.2)
   - SwiftyJSON (4.3.0)
   - WeakMapTable (1.2.0)
 
@@ -25,34 +20,29 @@ DEPENDENCIES:
   - Kingfisher (~> 5.0)
   - ReactorKit (~> 2.0)
   - RxCocoa (~> 5.0)
-  - RxDataSources (~> 4.0)
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
-    - Differentiator
     - Kingfisher
     - ReactorKit
     - RxCocoa
-    - RxDataSources
     - RxRelay
     - RxSwift
     - SwiftyJSON
     - WeakMapTable
 
 SPEC CHECKSUMS:
-  Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
-  Differentiator: 886080237d9f87f322641dedbc5be257061b0602
-  Kingfisher: 6e1a13523fcb1c86924ce53affe4ac957e544d59
-  ReactorKit: 12a93358c554bb3f167b16b14c40374fa9cd5acd
+  Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
+  Kingfisher: a3c03d702433fa6cfedabb2bddbe076fb8f2e902
+  ReactorKit: 6d894a20c3d508344320901cd8e386fde92df4b6
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
-  RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
-  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
 
-PODFILE CHECKSUM: 8205278db12c96651be4462b18814d37306c26f8
+PODFILE CHECKSUM: 31f507bf4d43957bbf56133217df456b1110a99f
 
 COCOAPODS: 1.10.0

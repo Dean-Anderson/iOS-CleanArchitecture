@@ -10,9 +10,15 @@ import Foundation
 import UIKit
 
 enum Scene {
-    case mvvm
-    case reactorKit
+    case mvvm(Environment)
+    case reactorKit(Environment)
     case detail(URL?)
+}
+
+enum Environment {
+    case normal
+    case success
+    case failure
 }
 
 protocol CoordinatorProviding {
@@ -30,10 +36,12 @@ final class Coordinator: CoordinatorProviding {
         let vc: UIViewController
         
         switch scene {
-        case .mvvm:
-            vc = MVVMViewController.createInstance()
-        case .reactorKit:
-            vc = ReactorViewController.createInstance()
+        case .mvvm(let environment):
+            let useCase = ImageSearchUseCaseFactory.create(environment: environment)
+            vc = MVVMViewController.createInstance(.init(useCase: useCase))
+        case .reactorKit(let environment):
+            let useCase = ImageSearchUseCaseFactory.create(environment: environment)
+            vc = ReactorViewController.createInstance(.init(useCase: useCase))
         case .detail(let url):
             vc = DetailViewController.createInstance(url)
         }

@@ -6,15 +6,11 @@
 //  Copyright © 2020 Practice. All rights reserved.
 //
 
-import Foundation
 import SwiftyJSON
 
 struct ImagePack {
     let thumbnailLink: String
     let link: String
-    
-    var thumbnailURL: URL? { URL(string: thumbnailLink) }
-    var linkURL: URL? { URL(string: link) }
 }
 
 extension ImagePack {

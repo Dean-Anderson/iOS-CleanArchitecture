@@ -15,20 +15,21 @@ final class ImageReactor: Reactor {
     }
     
     enum Mutation {
-        case images([ImagePack])
+        case images([ImageCellCreatable])
         case error(CustomError)
     }
     
     struct State {
-        var images: [ImagePack] = []
+        var images: [ImageCellCreatable] = []
         var error: CustomError?
     }
     
     var initialState: State = State()
-    let service: ImageServiceProviding
     
-    init(service: ImageServiceProviding) {
-        self.service = service
+    private let useCase: ImageSearchUseCase
+    
+    init(useCase: ImageSearchUseCase) {
+        self.useCase = useCase
     }
 }
 
@@ -36,7 +37,7 @@ extension ImageReactor {
     func mutate(action: ImageReactor.Action) -> Observable<ImageReactor.Mutation> {
         switch action {
         case .search(let keyword):
-            let result = service.images(query: keyword).share()
+            let result = useCase.search(text: keyword).share()
             let success = result.compactMap{ $0.success }.map{ Mutation.images($0) }
             let failure = result.compactMap{ $0.failure }.map{ Mutation.error($0) }
             return Observable.merge(success, failure)

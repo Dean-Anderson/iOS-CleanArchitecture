@@ -14,7 +14,7 @@ final class ReactorViewController: UIViewController, StoryboardView {
     @IBOutlet private weak var tableView: UITableView!
     
     fileprivate var coordinator: Coordinator?
-    var reactor: ImageReactor? = ImageReactor(service: ImageService())
+    var reactor: ImageReactor? = nil
     var disposeBag: DisposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -32,6 +32,7 @@ final class ReactorViewController: UIViewController, StoryboardView {
     func bind(reactor: ImageReactor) {
         searchKeywoard.rx.text
             .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
             .map{ ImageReactor.Action.search($0) }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
@@ -39,13 +40,13 @@ final class ReactorViewController: UIViewController, StoryboardView {
         reactor.state
             .map{ $0.images }
             .bind(to: tableView.rx.items(cellIdentifier: ImageCell.className, cellType: ImageCell.self)) { (row, image, cell) in
-                cell.set(url: image.thumbnailURL)
+                cell.bind(drawable: image)
             }
             .disposed(by: disposeBag)
     }
     
     private func bind() {
-        tableView.rx.modelSelected(ImagePack.self)
+        tableView.rx.modelSelected(ImageCellCreatable.self)
             .compactMap{ $0.linkURL }
             .map{ Scene.detail($0) }
             .subscribe(onNext: { [weak self] in
@@ -55,7 +56,15 @@ final class ReactorViewController: UIViewController, StoryboardView {
     }
 }
 
-extension ReactorViewController: VCFactory {
+extension ReactorViewController: VCBindFactory {
     static var storyboardIdentifier: String = ReactorViewController.className
     static var vcIdentifier: String = ""
+    
+    func bindData(value: Dependency) {
+        reactor = ImageReactor.init(useCase: value.useCase)
+    }
+    
+    struct Dependency {
+        let useCase: ImageSearchUseCase
+    }
 }

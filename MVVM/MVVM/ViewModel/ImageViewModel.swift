@@ -13,7 +13,8 @@ protocol ImageViewModelInputProviding {
 }
 
 protocol ImageViewModelOutputProviding {
-    var results: Observable<Swift.Result<[ImagePack], CustomError>> { get }
+    var imageCellCreatables: Observable<[ImageCellCreatable]> { get }
+    var error: Observable<CustomError> { get }
 }
 
 protocol ImageViewModelProviding: ImageViewModelInputProviding, ImageViewModelOutputProviding {
@@ -27,12 +28,17 @@ final class ImageViewModel: ImageViewModelProviding {
     
     private let keywordSubject: PublishSubject<String?> = PublishSubject()
     
-    var results: Observable<Swift.Result<[ImagePack], CustomError>>
+    let imageCellCreatables: Observable<[ImageCellCreatable]>
+    let error: Observable<CustomError>
     
-    init(service: ImageServiceProviding) {
-        results = keywordSubject.asObservable()
-            .flatMapLatest{ service.images(query: $0) }
+    init(useCase: ImageSearchUseCase) {
+        let search = keywordSubject.asObservable()
+            .flatMapLatest{ useCase.search(text: $0) }
             .share()
+        
+        imageCellCreatables = search.compactMap{ $0.success }
+        
+        error = search.compactMap{ $0.failure }
     }
 }
 

@@ -9,7 +9,7 @@
 import RxSwift
 
 private protocol ViewModelBindable {
-    var viewModel: ImageViewModel { get }
+    var viewModel: ImageViewModelProviding? { get }
     var coordinator: Coordinator? { get }
     var disposeBag: DisposeBag { get }
     func bind(text: Observable<String?>, tableView: UITableView)
@@ -19,7 +19,7 @@ final class MVVMViewController: UIViewController {
     @IBOutlet private weak var searchKeywoard: UITextField!
     @IBOutlet private weak var tableView: UITableView!
     
-    fileprivate let viewModel: ImageViewModel = ImageViewModel(service: ImageService())
+    fileprivate var viewModel: ImageViewModelProviding?
     fileprivate var coordinator: Coordinator?
     fileprivate let disposeBag: DisposeBag = DisposeBag()
     
@@ -38,6 +38,7 @@ final class MVVMViewController: UIViewController {
     private func bind() {
         let textObservable = searchKeywoard.rx.text
             .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
         
         bind(text: textObservable,
              tableView: tableView)
@@ -47,29 +48,38 @@ final class MVVMViewController: UIViewController {
 extension MVVMViewController: ViewModelBindable {
     func bind(text: Observable<String?>, tableView: UITableView) {
         text
-            .subscribe(onNext: { [weak viewModel] in
-                viewModel?.input.search(keyword: $0)
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel?.input.search(keyword: $0)
             })
             .disposed(by: disposeBag)
         
-        viewModel.output.results
-            .compactMap{ $0.success }
-            .bind(to: tableView.rx.items(cellIdentifier: ImageCell.className, cellType: ImageCell.self)) { (row, image, cell) in
-                cell.set(url: image.thumbnailURL)
-            }
-            .disposed(by: disposeBag)
-        
-        tableView.rx.modelSelected(ImagePack.self)
+        tableView.rx.modelSelected(ImageCellCreatable.self)
             .compactMap{ $0.linkURL }
             .map{ Scene.detail($0) }
             .subscribe(onNext: { [weak coordinator] in
                 coordinator?.show(scene: $0)
             })
             .disposed(by: disposeBag)
+        
+        viewModel?.output.imageCellCreatables
+            .bind(to: tableView.rx.items(cellIdentifier: ImageCell.className, cellType: ImageCell.self)) { (row, image, cell) in
+                cell.bind(drawable: image)
+            }
+            .disposed(by: disposeBag)
     }
 }
 
-extension MVVMViewController: VCFactory {
+extension MVVMViewController: VCBindFactory {
     static var storyboardIdentifier: String = MVVMViewController.className
     static var vcIdentifier: String = ""
+    
+    func bindData(value: Dependency) {
+        viewModel = ImageViewModel(useCase: value.useCase)
+    }
+}
+
+extension MVVMViewController {
+    struct Dependency {
+        let useCase: ImageSearchUseCase
+    }
 }

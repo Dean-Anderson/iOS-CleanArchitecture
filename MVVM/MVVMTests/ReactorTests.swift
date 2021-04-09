@@ -22,28 +22,34 @@ class ReactorTests: XCTestCase {
     }
 
     func testSuccess() throws {
-        reactor = ImageReactor(service: ImageSuccessService())
+        let repository = ImageSuccessRepository()
+        let useCase = DefaultImageSearchUseCase(repository: repository)
+        reactor = ImageReactor(useCase: useCase)
         
         _ = reactor.state
-            .map{ $0.images }
+            .compactMap{ $0.images.first }
             .take(1)
-            .subscribe(onNext: { XCTAssertEqual($0.count, 0) })
+            .subscribe(onNext: { XCTAssertEqual($0.imageURL, repository.mock.imageURL) })
         
         _ = reactor.state
-            .map{ $0.error }
+            .compactMap{ $0.error }
             .take(1)
-            .subscribe(onNext: { XCTAssertNil($0) })
+            .subscribe(onNext: { _ in XCTFail() })
         
         reactor.action.onNext(.search(""))
     }
     
     func testFailure() throws {
-         reactor = ImageReactor(service: ImageFailureService())
+        let repository = ImageFailureRepository()
+        let useCase = DefaultImageSearchUseCase(repository: repository)
+        reactor = ImageReactor(useCase: useCase)
          
-         _ = reactor.state
-             .compactMap{ $0.images }
-             .take(1)
-             .subscribe(onNext: { XCTAssertEqual($0.count, 0) })
+        _ = reactor.state
+            .compactMap{ $0.images }
+            .take(1)
+            .subscribe(onNext: {
+                XCTAssert($0.isEmpty)
+            })
          
          _ = reactor.state
              .compactMap{ $0.error }
