@@ -11,6 +11,3 @@ UI -> ViewModel or Reactor -> UseCase -> Repository -> Entity
 - Liskov Substitution : ImagePack > ImageCellCreatable
 - Interface Segregation : ImageCellDrawable, ImageCellInteractable
 - Dependency Inversion : Lower layer's Don't knows higher layer's information
-
-# TO DO
-- IOC Container - Inversion Of Control (Swinject)
